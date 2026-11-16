@@ -22,8 +22,10 @@ def validate_register(data):
     """Return invalid registration fields, or [] when input is valid."""
     invalid_fields = validate_login(data)
 
-    # Only check length after confirming the password is a nonblank string.
-    if "password" not in invalid_fields and len(data["password"]) < 12:
-        invalid_fields.append("password")
+    # Require 12 characters and stay within bcrypt's 72-byte limit.
+    if "password" not in invalid_fields:
+        password = data["password"]
+        if len(password) < 12 or len(password.encode("utf-8")) > 72:
+            invalid_fields.append("password")
 
     return invalid_fields
