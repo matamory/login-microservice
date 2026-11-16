@@ -16,8 +16,10 @@ init_db()
 # register route
 @app.post("/register")
 def register():
-    data = request.get_json() or {}
-
+    data = request.get_json(silent=True)
+    if not isinstance(data, dict):
+        return jsonify(success=False, error="Invalid or missing JSON"), 400
+        
     invalid_fields = validate_register(data)
     if invalid_fields:
         return jsonify(success=False, error="Invalid fields", fields=invalid_fields), 400
@@ -32,7 +34,10 @@ def register():
 # login routes
 @app.post("/login")
 def login():
-    data = request.get_json() or {}
+    data = request.get_json(silent=True)
+    if not isinstance(data, dict):
+        return jsonify(success=False, error="Invalid or missing JSON"), 400
+        
 
     invalid_fields = validate_login(data)
     if invalid_fields:
