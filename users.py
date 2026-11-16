@@ -95,6 +95,9 @@ def check_password(password, password_hash):
     """
 
     pw_bytes = password.encode("utf-8") #convert text password to bytes 
+    if len(pw_bytes) > 72:
+        return False
+
     stored_bytes = password_hash.encode("utf-8") #convert stored hash password to bytes 
 
     matches = bcrypt.checkpw(pw_bytes, stored_bytes) #hashes pw and compares to stored hash
