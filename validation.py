@@ -1,15 +1,29 @@
-
-
-def validate_register(data):
-    """
-    *** Robert task ***
-    TODO: ensure data has appropriate fields so that later functions do not crash
-    """
-    return []
+"""Validate Login service input (Robert)."""
 
 
 def validate_login(data):
-    """
-    TODO: ensure data has appropriate fields so that later functions do not crash
-    """
-    return []
+    """Return invalid field names, or an empty list if all fields are valid."""
+    required_fields = ["app_id", "username", "password"]
+
+    # JSON arrays, numbers, and null are not valid request objects.
+    if not isinstance(data, dict):
+        return required_fields
+
+    invalid_fields = []
+    for field in required_fields:
+        value = data.get(field)
+        if not isinstance(value, str) or not value.strip():
+            invalid_fields.append(field)
+
+    return invalid_fields
+
+
+def validate_register(data):
+    """Return invalid registration fields, or [] when input is valid."""
+    invalid_fields = validate_login(data)
+
+    # Only check length after confirming the password is a nonblank string.
+    if "password" not in invalid_fields and len(data["password"]) < 12:
+        invalid_fields.append("password")
+
+    return invalid_fields
