@@ -46,7 +46,7 @@ Both endpoints take these fields:
 | --- | --- | --- |
 | app_id  | string | "fitness_tracker", "lens_of_edu", or "medical_journal" |
 | username | string | cannot be empty |
-| item_id | string | must be at least 12 characters and less than 72 bytes |
+| password | string | must be at least 12 characters and less than 72 bytes |
 
 
 ## Example call for requesting data
