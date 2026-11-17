@@ -178,6 +178,4 @@ Output:
 ## UML sequence diagram that communicates how to request and receive data from the microservice
 
 
-![Register UML sequence diagram] (uml/uml_register.png]
-
-![Login UML sequence diagram] (uml/uml_login.png]
+![Register UML sequence diagram] (uml/uml.png]
